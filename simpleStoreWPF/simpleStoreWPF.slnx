@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="simpleStoreWPF/simpleStoreWPF.csproj" />
+  <Project Path="SimpleStore.Admin.Core/SimpleStore.Admin.Core.csproj" />
+  <Project Path="SimpleStore.Admin.Tests/SimpleStore.Admin.Tests.csproj" />
+  <Project Path="SimpleStore.Admin.UI/SimpleStore.Admin.UI.csproj" />
 </Solution>

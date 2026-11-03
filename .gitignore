@@ -19,9 +19,9 @@ x86/
 [Aa]rm64/
 bld/
 [Bb]in/
-[Ob]j/
-[Lg]og/
-[Lg]ogs/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
 
 ## Visual Studio 2015/2017/2019/2022 cache folder
 .vs/
