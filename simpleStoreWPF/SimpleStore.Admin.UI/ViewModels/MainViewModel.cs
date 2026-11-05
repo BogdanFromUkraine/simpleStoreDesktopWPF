@@ -1,27 +1,35 @@
-﻿using System.Windows.Input;
+﻿using SimpleStore.Admin.Core.Entities;
+using SimpleStore.Admin.Core.Interfaces;
 using SimpleStore.Admin.UI.Commands;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace SimpleStore.Admin.UI.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private string _title = "SimpleStore Admin — Clean Architecture & DI";
+    private readonly IProductRepository _productRepository;
 
-    public string Title
+    public ObservableCollection<Product> Products { get; } = new();
+
+    public ICommand LoadProductsCommand { get; }
+
+    public MainViewModel(IProductRepository productRepository)
     {
-        get => _title;
-        set => SetProperty(ref _title, value);
+        _productRepository = productRepository;
+        LoadProductsCommand = new RelayCommand(async _ => await LoadProductsAsync());
+
+        // Автоматично завантажуємо товари при створенні ViewModel
+        _ = LoadProductsAsync();
     }
 
-    public ICommand ChangeTitleCommand { get; }
-
-    public MainViewModel()
+    private async Task LoadProductsAsync()
     {
-        ChangeTitleCommand = new RelayCommand(_ => ChangeTitle());
-    }
-
-    private void ChangeTitle()
-    {
-        Title = "Заголовок успішно змінено через RelayCommand!";
+        var products = await _productRepository.GetAllAsync();
+        Products.Clear();
+        foreach (var product in products)
+        {
+            Products.Add(product);
+        }
     }
 }

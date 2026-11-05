@@ -1,7 +1,10 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SimpleStore.Admin.Core.Interfaces;
+using SimpleStore.Admin.Core.Repositories;
 using SimpleStore.Admin.UI.ViewModels;
+
 
 namespace SimpleStore.Admin.UI;
 
@@ -17,6 +20,8 @@ public partial class App : Application
                 // Реєстрація ViewModels та Вікон у DI-контейнері
                 services.AddSingleton<MainWindow>();
                 services.AddSingleton<MainViewModel>();
+
+                services.AddSingleton<IProductRepository, InMemoryProductRepository>();
             })
             .Build();
     }
